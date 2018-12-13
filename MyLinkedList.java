@@ -6,6 +6,12 @@ public class MyLinkedList {
 	end = last;
 	size = 2;
     }
+    public MyLinkedList() {
+	size = 0;
+    }
+    public MyLinkedList(Node value) {
+	start = value;
+    }
     public int size() {
 	return size;
     }
@@ -20,18 +26,25 @@ public class MyLinkedList {
 	return true;
     }
     public String toString() {
-	String output = "";
-	Node current = start;
-	for(int i = 0; i < size; i++) {
-	    if (i == size - 1) {
-		output += current.get();
-	    }
-	    else {
-		output += current.get() + ",";
-		current = current.getNext();
-	    }
+	// String output = "";
+	// Node current = start;
+	// for(int i = 0; i < size; i++) {
+	//     if (i == size - 1) {
+	// 	output += current.get();
+	//     }
+	//     else {
+	// 	output += current.get() + ",";
+	// 	current = current.getNext();
+	//     }
+	// }
+	// return output;
+    }
+    private Node getNthNode(int index) {
+	Node current = start; 
+	for(int i = 0; i <= index; i++) {
+	    current = current.next();
 	}
-	return output;
+	return current;
     }
     public static void main(String[]args) {
 	Node a, b;
@@ -47,14 +60,14 @@ public class MyLinkedList {
 }
 
 class Node {
-    private int data;
+    private Integer data;
     private Node next, prev;
-    public Node(int input, Node before, Node after) {
+    public Node(Integer input, Node before, Node after) {
     	data = input;
     	prev = before;
     	next = after;
     }
-    public Node(int input) {
+    public Node(Integer input) {
 	data = input;
     }
     public Node(Node input) {
@@ -62,7 +75,7 @@ class Node {
 	next = input.getNext();
 	prev = input.getPrev();
     }
-    public int get() {
+    public Integer getData() {
 	return data;
     }
     public Node getNext() {
@@ -70,6 +83,9 @@ class Node {
     }
     public Node getPrev() {
 	return prev;
+    }
+    public Integer setData(Integer value) {
+	data = value;
     }
     public void setNext(Node after) {
 	next = new Node(after);
