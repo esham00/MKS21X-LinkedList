@@ -16,33 +16,48 @@ public class MyLinkedList {
 	return size;
     }
     public boolean add(int value) {
-	//creating a new end
-       	Node temp = new Node(value, end, null);
-	//creating a link between the old end and new end
-	end.setNext(temp);
-	//replacing the old end 
-       	end = temp;
+	if (size == 0) {
+	    start = new Node(value);
+	}
+	if (size == 1) {
+	    end = new Node(value, start, null);
+	    start.setNext(end);
+	}
+	if (size == 2) {
+	    Node temp = new Node(value, end, null);
+	    end.setNext(temp);
+	    start.setNext(end);
+	    end = temp;
+	}
+	else {
+	    Node temp = new Node(value, end, null);
+	    end.setNext(temp);
+	    end = temp;
+	}
 	size++;
 	return true;
     }
     public String toString() {
-	// String output = "";
-	// Node current = start;
-	// for(int i = 0; i < size; i++) {
-	//     if (i == size - 1) {
-	// 	output += current.get();
-	//     }
-	//     else {
-	// 	output += current.get() + ",";
-	// 	current = current.getNext();
-	//     }
-	// }
-	// return output;
+	String output = "";
+	Node current = start;
+	while (current != null) {
+	    if (current.getNext() == null) {
+	    	output += current.getData();
+	    }
+	    else {
+	    	output += current.getData() + ",";
+	    }
+     	    current = current.getNext();
+	    System.out.println(current);
+	    System.out.println(current.getNext());
+	}
+	return output;
     }
     private Node getNthNode(int index) {
+	//exception: index out of bounds
 	Node current = start; 
 	for(int i = 0; i <= index; i++) {
-	    current = current.next();
+	    current = current.getNext();
 	}
 	return current;
     }
@@ -53,9 +68,12 @@ public class MyLinkedList {
 	a.setNext(b);
 	b.setPrev(a);
         MyLinkedList c = new MyLinkedList(a, b);
-	//	System.out.println(c);
+	//System.out.println(c);
 	c.add(2);
-	//	System.out.println(c);
+	c.add(3);
+	c.add(4);
+	c.add(5);
+	System.out.println(c);
     }
 }
 
@@ -71,7 +89,7 @@ class Node {
 	data = input;
     }
     public Node(Node input) {
-	data = input.get();
+	data = input.getData();
 	next = input.getNext();
 	prev = input.getPrev();
     }
@@ -85,12 +103,17 @@ class Node {
 	return prev;
     }
     public Integer setData(Integer value) {
+	int temp = data;
 	data = value;
+        return temp;
     }
     public void setNext(Node after) {
 	next = new Node(after);
     }
     public void setPrev(Node before) {
 	prev = new Node(before);
+    }
+    public String toString() {
+	return data + "";
     }
 }
