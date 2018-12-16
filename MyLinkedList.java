@@ -132,6 +132,7 @@ public class MyLinkedList {
 	}
 	else if (index == size - 1) {
 	    end = end.getPrev();
+	    end.setNext(null);
 	}
 	else {
 	    Node after = current.getNext();
