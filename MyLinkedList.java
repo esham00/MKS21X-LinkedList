@@ -19,15 +19,9 @@ public class MyLinkedList {
 	if (size == 0) {
 	    start = new Node(value);
 	}
-	if (size == 1) {
+	else if (size == 1) {
 	    end = new Node(value, start, null);
 	    start.setNext(end);
-	}
-	if (size == 2) {
-	    Node temp = new Node(value, end, null);
-	    end.setNext(temp);
-	    start.setNext(end);
-	    end = temp;
 	}
 	else {
 	    Node temp = new Node(value, end, null);
@@ -37,9 +31,11 @@ public class MyLinkedList {
 	size++;
 	return true;
     }
+
     public String toString() {
 	String output = "";
 	Node current = start;
+	int i = 0;
 	while (current != null) {
 	    if (current.getNext() == null) {
 	    	output += current.getData();
@@ -47,9 +43,7 @@ public class MyLinkedList {
 	    else {
 	    	output += current.getData() + ",";
 	    }
-     	    current = current.getNext();
-	    System.out.println(current);
-	    System.out.println(current.getNext());
+	    current = current.getNext();
 	}
 	return output;
     }
@@ -63,12 +57,10 @@ public class MyLinkedList {
     }
     public static void main(String[]args) {
 	Node a, b;
-	a = new Node(0);
-	b = new Node(1);
-	a.setNext(b);
-	b.setPrev(a);
-        MyLinkedList c = new MyLinkedList(a, b);
+        MyLinkedList c = new MyLinkedList();
 	//System.out.println(c);
+	c.add(0);
+	c.add(1);
 	c.add(2);
 	c.add(3);
 	c.add(4);
@@ -108,10 +100,10 @@ class Node {
         return temp;
     }
     public void setNext(Node after) {
-	next = new Node(after);
+	next = after;
     }
     public void setPrev(Node before) {
-	prev = new Node(before);
+	prev = before;
     }
     public String toString() {
 	return data + "";
