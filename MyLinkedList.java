@@ -53,7 +53,7 @@ public class MyLinkedList {
     }
     private Node getNthNode(int index) {
 	Node current = start; 
-	for(int i = 0; i <= index; i++) {
+	for(int i = 0; i < index; i++) {
 	    current = current.getNext();
 	}
 	return current;
@@ -61,17 +61,17 @@ public class MyLinkedList {
     public Integer get(int index) {
 	//exception: index out of bounds
         if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
 	}
 	return getNthNode(index).getData();
     }
     public Integer set(int index, Integer value) {
 	//exception : index out of bounds
 	if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
 	}
         if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
 	}
 	Node change = getNthNode(index);
 	Integer old = change.getData();
@@ -101,7 +101,7 @@ public class MyLinkedList {
     public void add (int index, Integer value) {
 	//exception : index out of bounds
 	if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
 	}
 	if (index == 0) {
 	    Node temp = new Node(value, null, start);
@@ -122,7 +122,7 @@ public class MyLinkedList {
     public Integer remove(int index) {
 	//exception: index out of bounds
         if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " isg not within the range of your list");
 	}
 	Node current = getNthNode(index);
 	if (index == 0) {
@@ -137,6 +137,7 @@ public class MyLinkedList {
 	    after.setPrev(before);
 	    before.setNext(after);
 	}
+	size--;
 	return current.getData();
     }
     public boolean remove(Integer value) {
