@@ -107,8 +107,9 @@ public class MyLinkedList {
 	    Node temp = new Node(value, null, start);
 	    start.setPrev(temp);
 	    start = temp;
+	    size++;
 	}
-	if (index == size - 1) {
+	else if (index == size - 1) {
 	    add(value);
 	}
 	else {
@@ -117,18 +118,19 @@ public class MyLinkedList {
 	    Node wedge = new Node(value, before, after);
 	    after.setPrev(wedge);
 	    before.setNext(wedge);
+	    size++;
 	}
     }
     public Integer remove(int index) {
 	//exception: index out of bounds
         if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + " isg not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
 	}
 	Node current = getNthNode(index);
 	if (index == 0) {
 	    start = start.getNext();
 	}
-	if (index == size - 1) {
+	else if (index == size - 1) {
 	    end = end.getPrev();
 	}
 	else {
