@@ -52,7 +52,6 @@ public class MyLinkedList {
 	return output;
     }
     private Node getNthNode(int index) {
-	//exception: index out of bounds
 	Node current = start; 
 	for(int i = 0; i <= index; i++) {
 	    current = current.getNext();
@@ -60,10 +59,20 @@ public class MyLinkedList {
 	return current;
     }
     public Integer get(int index) {
+	//exception: index out of bounds
+        if (index < 0 || index > size - 1) {
+	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	}
 	return getNthNode(index).getData();
     }
     public Integer set(int index, Integer value) {
-	//exception: index out of bounds
+	//exception : index out of bounds
+	if (index < 0 || index > size - 1) {
+	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	}
+        if (index < 0 || index > size - 1) {
+	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	}
 	Node change = getNthNode(index);
 	Integer old = change.getData();
 	change.setData(value);
@@ -75,22 +84,25 @@ public class MyLinkedList {
 	    if (current.getData().equals(value)) {
 		return true;
 	    }
-	    current = current.next();
+	    current = current.getNext();
 	}
 	return false;
     }
-    public int indexOf(Intger value) {
-	//exception : index out of bounds
+    public int indexOf(Integer value) {
 	Node current = start;
 	for(int i = 0; i < size; i++) {
 	    if (current.getData().equals(value)) {
 		    return i;
 	    }
-	    current = current.next();
+	    current = current.getNext();
 	}
 	return -1;
     }
     public void add (int index, Integer value) {
+	//exception : index out of bounds
+	if (index < 0 || index > size - 1) {
+	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	}
 	if (index == 0) {
 	    Node temp = new Node(value, null, start);
 	    start.setPrev(temp);
@@ -108,7 +120,10 @@ public class MyLinkedList {
 	}
     }
     public Integer remove(int index) {
-	//exception
+	//exception: index out of bounds
+        if (index < 0 || index > size - 1) {
+	    throw new IndexOutOfBoundsException(index + "is not within the range of your list");
+	}
 	Node current = getNthNode(index);
 	if (index == 0) {
 	    start = start.getNext();
@@ -125,24 +140,13 @@ public class MyLinkedList {
 	return current.getData();
     }
     public boolean remove(Integer value) {
-	//exception
 	int i = indexOf(value);
-	if (i >= -1) {
-	    remove(i, value);
+	if (i >= 0) {
+	    remove(i);
+	    return true;
 	}
-    }
-	    
-    public static void main(String[]args) {
-	Node a, b;
-        MyLinkedList c = new MyLinkedList();
-	//System.out.println(c);
-	c.add(0);
-	c.add(1);
-	c.add(2);
-	c.add(3);
-	c.add(4);
-	c.add(5);
-	System.out.println(c);
+	//by return false, you don't need to throw a no such element exception
+	return false;
     }
 }
 
