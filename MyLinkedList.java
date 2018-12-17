@@ -37,7 +37,7 @@ public class MyLinkedList {
 	return true;
     }
     public String toString() {
-	String output = "";
+	String output = "[";
 	Node current = start;
 	int i = 0;
 	while (current != null) {
@@ -45,11 +45,11 @@ public class MyLinkedList {
 	    	output += current.getData();
 	    }
 	    else {
-	    	output += current.getData() + ",";
+	    	output += current.getData() + ", ";
 	    }
 	    current = current.getNext();
 	}
-	return output;
+	return output + "]";
     }
     private Node getNthNode(int index) {
 	Node current = start; 
@@ -110,7 +110,12 @@ public class MyLinkedList {
 	    size++;
 	}
 	else if (index == size - 1) {
-	    add(value);
+	    Node after = end;
+	    Node before = end.getPrev();
+	    Node temp = new Node(value, before, after);
+	    before.setNext(temp);
+	    after.setPrev(temp);
+	    size++;
 	}
 	else {
 	    Node after = getNthNode(index);
