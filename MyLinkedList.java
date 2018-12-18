@@ -178,6 +178,7 @@ public class MyLinkedList {
 	    //linking the lists
 	    this.end.setNext(other.start);
 	    other.start.setPrev(this.end);
+            end = other.end;
 	    //clearing the other list
 	    other.clear();
 	}
