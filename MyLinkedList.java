@@ -61,17 +61,17 @@ public class MyLinkedList {
     public Integer get(int index) {
 	//exception: index out of bounds
         if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " is out of bounds");
 	}
 	return getNthNode(index).getData();
     }
     public Integer set(int index, Integer value) {
 	//exception : index out of bounds
 	if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " is out of bounds");
 	}
         if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " is out of bounds");
 	}
 	Node change = getNthNode(index);
 	Integer old = change.getData();
@@ -96,22 +96,26 @@ public class MyLinkedList {
 	    }
 	    current = current.getNext();
 	}
+	//if value is not within the list 
 	return -1;
     }
     public void add (int index, Integer value) {
 	//exception : index out of bounds
-	if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
+	if (index < 0 || index > size) {
+	    throw new IndexOutOfBoundsException(index + " is out of bounds");
 	}
+	//adding at start
 	if (index == 0) {
 	    Node temp = new Node(value, null, start);
 	    start.setPrev(temp);
 	    start = temp;
 	    size++;
 	}
+	//adding at end
 	else if (index == size) {
 	    add(index);
 	}
+	//if not then there must be an index before and after
 	else {
 	    Node after = getNthNode(index);
 	    Node before = after.getPrev();
@@ -124,16 +128,19 @@ public class MyLinkedList {
     public Integer remove(int index) {
 	//exception: index out of bounds
         if (index < 0 || index > size - 1) {
-	    throw new IndexOutOfBoundsException(index + " is not within the range of your list");
+	    throw new IndexOutOfBoundsException(index + " is out of bounds");
 	}
 	Node current = getNthNode(index);
+	//removing at start
 	if (index == 0) {
 	    start = start.getNext();
 	}
+	//removing at end
 	else if (index == size - 1) {
 	    end = end.getPrev();
 	    end.setNext(null);
 	}
+	//if not, there must be an index before and after
 	else {
 	    Node after = current.getNext();
 	    Node before = current.getPrev();
@@ -152,6 +159,19 @@ public class MyLinkedList {
 	//by return false, you don't need to throw a no such element exception
 	return false;
     }
+    public void clear() {
+	size = 0;
+	start = null;
+	end = null;
+    }
+     public void extend(MyLinkedList other){
+	 //linking the lists
+	 this.end.setNext(other.start);
+	 //combining the sizes
+	 size += other.size();
+	 //clearing the othe rlist
+	 other.clear();
+     }
 }
 
 class Node {
