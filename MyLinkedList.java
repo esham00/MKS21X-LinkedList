@@ -164,13 +164,23 @@ public class MyLinkedList {
 	start = null;
 	end = null;
     }
-     public void extend(MyLinkedList other){
-	 //linking the lists
-	 this.end.setNext(other.start);
-	 //combining the sizes
-	 size += other.size();
-	 //clearing the othe rlist
-	 other.clear();
+    public void extend(MyLinkedList other){
+	//combining sizes
+	size += other.size();
+	//testing if this is empty
+	if (size == other.size()) {
+	    this.start = other.start;
+	    this.end = other.end;
+	    other.clear();
+	}
+	//if the other linked list is not empty then do the following procedure, does nothing if the other linked list is empty
+	else if (other.size != 0) {
+	    //linking the lists
+	    this.end.setNext(other.start);
+	    other.start.setPrev(this.end);
+	    //clearing the other list
+	    other.clear();
+	}
      }
 }
 
