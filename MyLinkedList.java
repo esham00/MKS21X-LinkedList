@@ -109,13 +109,8 @@ public class MyLinkedList {
 	    start = temp;
 	    size++;
 	}
-	else if (index == size - 1) {
-	    Node after = end;
-	    Node before = end.getPrev();
-	    Node temp = new Node(value, before, after);
-	    before.setNext(temp);
-	    after.setPrev(temp);
-	    size++;
+	else if (index == size) {
+	    add(index);
 	}
 	else {
 	    Node after = getNthNode(index);
